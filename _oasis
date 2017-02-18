@@ -13,7 +13,10 @@ Library vw
   Path:            lib
   Modules:         Vw
   InternalModules: Vw_bindings, Vw_generated
-  CClib:           -lvw
+  CClib:           -lvw_c_wrapper -lstdc++
+  CCOpt:            -stdlib=libstdc++
+  ByteOpt:          -warn-error +1..45
+  NativeOpt:        -warn-error +1..45
   BuildDepends:    ctypes.foreign, ctypes, threads, ctypes.stubs
   CSources:        vw_stubs.c
   BuildTools:      vw_stubgen

@@ -1,5 +1,5 @@
 (* OASIS_START *)
-(* DO NOT EDIT (digest: b67ad670aee09e8ef606f34acb79f229) *)
+(* DO NOT EDIT (digest: f2f1dab264e0a88547b04945f57f54a1) *)
 module OASISGettext = struct
 (* # 22 "src/oasis/OASISGettext.ml" *)
 
@@ -889,10 +889,27 @@ let package_default =
      lib_c = [("vw", "lib", [])];
      flags =
        [
+          (["oasis_library_vw_ccopt"; "compile"],
+            [(OASISExpr.EBool true, S [A "-ccopt"; A "-stdlib=libstdc++"])]);
           (["oasis_library_vw_cclib"; "link"],
-            [(OASISExpr.EBool true, S [A "-cclib"; A "-lvw"])]);
+            [
+               (OASISExpr.EBool true,
+                 S [A "-cclib"; A "-lvw_c_wrapper"; A "-cclib"; A "-lstdc++"])
+            ]);
           (["oasis_library_vw_cclib"; "ocamlmklib"; "c"],
-            [(OASISExpr.EBool true, S [A "-lvw"])])
+            [(OASISExpr.EBool true, S [A "-lvw_c_wrapper"; A "-lstdc++"])]);
+          (["oasis_library_vw_byte"; "ocaml"; "link"; "byte"],
+            [(OASISExpr.EBool true, S [A "-warn-error"; A "+1..45"])]);
+          (["oasis_library_vw_native"; "ocaml"; "link"; "native"],
+            [(OASISExpr.EBool true, S [A "-warn-error"; A "+1..45"])]);
+          (["oasis_library_vw_byte"; "ocaml"; "ocamldep"; "byte"],
+            [(OASISExpr.EBool true, S [A "-warn-error"; A "+1..45"])]);
+          (["oasis_library_vw_native"; "ocaml"; "ocamldep"; "native"],
+            [(OASISExpr.EBool true, S [A "-warn-error"; A "+1..45"])]);
+          (["oasis_library_vw_byte"; "ocaml"; "compile"; "byte"],
+            [(OASISExpr.EBool true, S [A "-warn-error"; A "+1..45"])]);
+          (["oasis_library_vw_native"; "ocaml"; "compile"; "native"],
+            [(OASISExpr.EBool true, S [A "-warn-error"; A "+1..45"])])
        ];
      includes = [("examples", ["lib"])]
   }
@@ -902,7 +919,7 @@ let conf = {MyOCamlbuildFindlib.no_automatic_syntax = false}
 
 let dispatch_default = MyOCamlbuildBase.dispatch_default conf package_default;;
 
-# 906 "myocamlbuild.ml"
+# 923 "myocamlbuild.ml"
 (* OASIS_STOP *)
 
 let dispatch = function
