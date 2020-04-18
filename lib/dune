@@ -1,0 +1,9 @@
+(library
+ (name            vw)
+ (public_name     vw)
+ (foreign_stubs
+  (language c)
+  (names mystubs)
+  (flags -O3 -I /usr/local/Cellar/vowpal-wabbit/8.8.1_1/include -I./lib))
+ (c_library_flags (-lstdc++ -L/usr/local/Cellar/vowpal-wabbit/8.8.1_1/lib -lvw_c_wrapper))
+ )

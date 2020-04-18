@@ -1,12 +1,9 @@
-open Ctypes
+type handle
+type example
 
-module C = Vw_bindings.C(Vw_generated)
-
-let initialize args = C.vw_initialize args
-let read_example vw ex_str = C.vw_read_example vw ex_str
-let get_example vw = C.vw_get_example vw
-let finish_example ex = C.vw_finish_example ex
-let get_label ex = C.vw_get_label ex
-let learn handle ex = C.vw_learn handle ex
-let predict handle ex = C.vw_predict handle ex
-let save_model handle = C.vw_save_model handle
+external initialize : string -> handle = "caml_vw_init"
+external finish : handle -> unit = "caml_vw_finish"
+external read_example : handle -> string -> example = "caml_vw_read_example"
+external finish_example : handle -> example -> unit = "caml_vw_finish_example"
+external get_label : example -> float = "caml_vw_get_label"
+external learn : handle -> example -> float = "caml_vw_learn"
