@@ -9,6 +9,7 @@ external get_label : example -> float = "caml_vw_get_label"
 external learn : handle -> example -> float = "caml_vw_learn"
 external predict : handle -> example -> float = "caml_vw_predict"
 external get_action_score : example -> int -> float = "caml_get_action_score"
+external get_action_score_length : example -> int = "caml_get_action_score_length"
 external save_model : handle -> unit = "caml_vw_save_model"
 
 let fit vw example_strings num_passes =

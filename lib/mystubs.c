@@ -45,6 +45,10 @@ CAMLprim value caml_get_action_score(value v_example, value v_i) {
   return caml_copy_double(VW_GetActionScore((VW_EXAMPLE)v_example, (size_t)Int_val(v_i)));
 }
 
+CAMLprim value caml_get_action_score_length(value v_example) {
+  return Val_int(VW_GetActionScoreLength((VW_EXAMPLE)v_example));
+}
+
 CAMLprim value caml_vw_save_model(value v_handle) {
  VW_SaveModel((VW_HANDLE)v_handle);
  return Val_unit;

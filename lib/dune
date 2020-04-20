@@ -4,9 +4,6 @@
  (foreign_stubs
   (language c)
   (names mystubs)
-  ;(flags -O3 -I /usr/local/Cellar/vowpal-wabbit/8.8.1_1/include -I./lib))
- ;(c_library_flags (-lstdc++ -L/usr/local/Cellar/vowpal-wabbit/8.8.1_1/lib -lvw_c_wrapper))
- ;)
    (flags
      (:standard)
      (:include c_flags.sexp)
@@ -20,4 +17,4 @@
 (rule
  (targets c_flags.sexp c_library_flags.sexp)
  (deps    (:discover config/discover.exe))
- (action  (run %{discover} -ocamlc %{ocamlc})))
+ (action  (run %{discover})))
