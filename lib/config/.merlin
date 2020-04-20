@@ -1,0 +1,16 @@
+EXCLUDE_QUERY_DIR
+B /Users/tbrady/.opam/4.09.0/lib/dune-configurator
+B /Users/tbrady/.opam/4.09.0/lib/dune-private-libs/dune-lang
+B /Users/tbrady/.opam/4.09.0/lib/dune-private-libs/dune_csexp
+B /Users/tbrady/.opam/4.09.0/lib/dune-private-libs/ocaml-config
+B /Users/tbrady/.opam/4.09.0/lib/dune-private-libs/stdune
+B /Users/tbrady/.opam/4.09.0/lib/ocaml
+B ../../_build/default/lib/config/.discover.eobjs/byte
+S /Users/tbrady/.opam/4.09.0/lib/dune-configurator
+S /Users/tbrady/.opam/4.09.0/lib/dune-private-libs/dune-lang
+S /Users/tbrady/.opam/4.09.0/lib/dune-private-libs/dune_csexp
+S /Users/tbrady/.opam/4.09.0/lib/dune-private-libs/ocaml-config
+S /Users/tbrady/.opam/4.09.0/lib/dune-private-libs/stdune
+S /Users/tbrady/.opam/4.09.0/lib/ocaml
+S .
+FLG -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs
