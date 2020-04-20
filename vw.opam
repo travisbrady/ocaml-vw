@@ -1,0 +1,19 @@
+opam-version: "2.0"
+name: "ocaml-vw"
+version: "0.1"
+synopsis: "Minimal OCaml bindings to the vowpal wabbit"
+description: """
+Ocaml bindings to the vowpal wabbit maching learning library
+"""
+maintainer: "Travis Brady <travis.brady@gmail.com>"
+authors: "Travis Brady <travis.brady@gmail.com>"
+license: "MIT"
+homepage: ""
+bug-reports: ""
+dev-repo: ""
+depends: [ "ocaml" "ocamlfind" ]
+build: [
+  ["./configure" "--prefix=%{prefix}%"]
+  [make]
+]
+install: [make "install"]
