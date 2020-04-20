@@ -35,3 +35,17 @@ CAMLprim value caml_vw_get_label(value v_example) {
 CAMLprim value caml_vw_learn(value v_handle, value v_example) {
  return caml_copy_double(VW_Learn((VW_HANDLE)v_handle, (VW_EXAMPLE)v_example));
 }
+
+CAMLprim value caml_vw_predict(value v_handle, value v_example) {
+ return caml_copy_double(
+     VW_Predict((VW_HANDLE)v_handle, (VW_EXAMPLE)v_example));
+}
+
+CAMLprim value caml_get_action_score(value v_example, value v_i) {
+  return caml_copy_double(VW_GetActionScore((VW_EXAMPLE)v_example, (size_t)Int_val(v_i)));
+}
+
+CAMLprim value caml_vw_save_model(value v_handle) {
+ VW_SaveModel((VW_HANDLE)v_handle);
+ return Val_unit;
+}
