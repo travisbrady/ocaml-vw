@@ -5,12 +5,28 @@ external initialize : string -> handle = "caml_vw_init"
 external finish : handle -> unit = "caml_vw_finish"
 external read_example : handle -> string -> example = "caml_vw_read_example"
 external finish_example : handle -> example -> unit = "caml_vw_finish_example"
+external get_prediction : example -> float = "caml_vw_get_prediction"
+external get_cost_sensitive_prediction : example -> float = "caml_vw_get_cost_sensitive_prediction"
 external get_label : example -> float = "caml_vw_get_label"
 external learn : handle -> example -> float = "caml_vw_learn"
 external predict : handle -> example -> float = "caml_vw_predict"
 external get_action_score : example -> int -> float = "caml_get_action_score"
 external get_action_score_length : example -> int = "caml_get_action_score_length"
+external get_confidence : example -> float = "caml_vw_get_confidence"
 external save_model : handle -> unit = "caml_vw_save_model"
+
+let learn_string vw ex_str =
+  let ex = read_example vw ex_str in
+  let ret = learn vw ex in
+  finish_example vw ex;
+  ret
+
+let predict_string vw ex_str =
+  let ex = read_example vw ex_str in
+  let _ = predict vw ex in
+  let ret = get_prediction ex in
+  finish_example vw ex;
+  ret
 
 let fit vw example_strings num_passes =
     let examples = Array.map (fun x -> read_example vw x) example_strings in

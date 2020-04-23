@@ -28,6 +28,14 @@ CAMLprim value caml_vw_finish_example(value v_handle, value v_example) {
  return Val_unit;
 }
 
+CAMLprim value caml_vw_get_prediction(value v_example) {
+  return caml_copy_double(VW_GetPrediction((VW_EXAMPLE)v_example));
+}
+
+CAMLprim value caml_vw_get_cost_sensitive_prediction(value v_example) {
+  return caml_copy_double(VW_GetCostSensitivePrediction((VW_EXAMPLE)v_example));
+}
+
 CAMLprim value caml_vw_get_label(value v_example) {
  return caml_copy_double(VW_GetLabel((VW_EXAMPLE)v_example));
 }
@@ -47,6 +55,10 @@ CAMLprim value caml_get_action_score(value v_example, value v_i) {
 
 CAMLprim value caml_get_action_score_length(value v_example) {
   return Val_int(VW_GetActionScoreLength((VW_EXAMPLE)v_example));
+}
+
+CAMLprim value caml_vw_get_confidence(value v_example) {
+  return caml_copy_double(VW_GetConfidence((VW_EXAMPLE)v_example));
 }
 
 CAMLprim value caml_vw_save_model(value v_handle) {
