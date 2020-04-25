@@ -28,6 +28,13 @@ let predict_string vw ex_str =
   finish_example vw ex;
   ret
 
+let cb_predict_string vw ex_str =
+  let ex = read_example vw ex_str in
+  let _ = predict vw ex in
+  let ret = get_cost_sensitive_prediction ex in
+  finish_example vw ex;
+  ret
+
 let fit vw example_strings num_passes =
     let examples = Array.map (fun x -> read_example vw x) example_strings in
     for _ = 0 to num_passes do
