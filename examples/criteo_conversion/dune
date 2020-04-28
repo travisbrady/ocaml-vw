@@ -1,0 +1,3 @@
+(executable
+ (name criteo_conversion)
+ (libraries vw core))
