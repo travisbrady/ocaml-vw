@@ -1,20 +1,21 @@
 (library
- (name            vw)
- (public_name     vw)
+ (name vw)
+ (public_name vw)
  (foreign_stubs
   (language c)
   (names mystubs)
-   (flags
-     (:standard)
-     (:include c_flags.sexp)
-     -O3
-    ))
+  (flags
+   (:standard)
+   (:include c_flags.sexp)
+   -O3))
  (c_library_flags
-   (:include c_library_flags.sexp) -lstdc++)
- (ocamlopt_flags -verbose)
- )
+  (:include c_library_flags.sexp)
+  -lstdc++)
+ (ocamlopt_flags -verbose))
 
 (rule
  (targets c_flags.sexp c_library_flags.sexp)
- (deps    (:discover config/discover.exe))
- (action  (run %{discover})))
+ (deps
+  (:discover config/discover.exe))
+ (action
+  (run %{discover})))
