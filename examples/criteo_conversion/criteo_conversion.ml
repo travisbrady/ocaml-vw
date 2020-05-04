@@ -74,7 +74,6 @@ let () =
     incr ctr;
   );
   printf "N: %d\n" !ctr;
-  printf "Average Test Log Likelihood: %f\n" (!ll /. (Float.of_int !ctr));
   let fi = Float.of_int !ctr in
   let acc = (Float.of_int !correct) /. (Float.of_int !ctr) in
   Vw.finish_passes vw;
