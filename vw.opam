@@ -7,7 +7,7 @@ Ocaml bindings to the vowpal wabbit maching learning library
 """
 maintainer: "Travis Brady <travis.brady@gmail.com>"
 authors: "Travis Brady <travis.brady@gmail.com>"
-license: "MIT"
+license: "BSD-3"
 homepage: ""
 bug-reports: ""
 dev-repo: ""
