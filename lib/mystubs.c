@@ -79,6 +79,16 @@ CAMLprim value caml_vw_get_confidence(value v_example) {
   return caml_copy_double(VW_GetConfidence((VW_EXAMPLE)v_example));
 }
 
+CAMLprim value caml_vw_get_weight(value v_handle, value v_index, value v_offset) {
+  size_t index = (size_t)Int_val(v_index);
+  size_t offset = (size_t)Int_val(v_offset);
+  return caml_copy_double(VW_Get_Weight((VW_HANDLE)v_handle, index, offset));
+}
+
+CAMLprim value caml_vw_num_weights(value v_handle) {
+ return Val_int(VW_Num_Weights((VW_HANDLE)v_handle));
+}
+
 CAMLprim value caml_vw_save_model(value v_handle) {
   VW_SaveModel((VW_HANDLE)v_handle);
   return Val_unit;

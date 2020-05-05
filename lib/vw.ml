@@ -17,6 +17,8 @@ external get_tag_length : example -> int = "caml_vw_get_tag_length"
 external get_tag : example -> string = "caml_vw_get_tag"
 external get_feature_number : example -> int = "caml_vw_get_feature_number"
 external get_confidence : example -> float = "caml_vw_get_confidence"
+external get_weight : handle -> int -> int -> float = "caml_vw_get_weight"
+external num_weights : handle -> int = "caml_vw_num_weights"
 external save_model : handle -> unit = "caml_vw_save_model"
 
 let learn_string vw ex_str =
@@ -46,4 +48,8 @@ let fit vw example_strings num_passes =
             let _ = learn vw examples.(i) in ()
         done;
     done;
+    Array.iter (fun x -> finish_example vw x) examples;
     ()
+
+let get_intercept vw =
+  get_weight vw 116060 0
