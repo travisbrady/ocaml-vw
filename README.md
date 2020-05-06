@@ -18,3 +18,6 @@ Vowpal Wabbit can be used for all sorts of standard supervised learning problems
 
 ## Examples
 Have a look in the [examples](/examples) directory for a handful of demonstrations of using `ocaml-vw`.
+
+## License
+BSD 3 Clause, the same as Vowpal Wabbit itself.
