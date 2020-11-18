@@ -33,14 +33,14 @@ let parse_line line =
   let labf = Float.of_string lab in
   let reward = Float.of_string (List.nth_exn chunks 1) in
   let cost = 1.0 -. reward in
-  let vw_string = sprintf "%s:%.4f:0.1 |%s" lab cost features in
-  let test_string = sprintf "|%s" features in
+  let vw_string = sprintf "%s:%.4f:0.1 | %s" lab cost features in
+  let test_string = sprintf "| %s" features in
   {chunks=chunks; features=features; lab=lab; labf=labf;
     reward=reward; test_string=test_string;
     train_string=vw_string}
 
 let () =
-  let vw = Vw.initialize "--cb 10 --cover 3 --cb_type dm" in
+  let vw = Vw.initialize "--cb 10 --cover 12 --cb_type ips -l 0.001" in
   let ic = In_channel.create "data/dataset.txt" in
   let ctr = ref 0 in
   let numerator_sum = ref 0.0 in
@@ -57,14 +57,18 @@ let () =
     let p = Vw.cb_predict_string vw ec.test_string in
     Float.Table.incr reco_arms p;
     let are_same = if (Float.equal ec.labf p) then 1.0 else 0.0 in
-    denom_sum := !denom_sum +. are_same;
-    numerator_sum := !numerator_sum +. (ec.reward *. are_same);
-    Float.Table.incr correct_pred ~by:(Int.of_float are_same) p;
 
-    if (!ctr mod 200) = 0 then (
+    if (Float.equal ec.labf p) then begin
+        denom_sum := !denom_sum +. are_same;
+        numerator_sum := !numerator_sum +. ec.reward;
+        Float.Table.incr correct_pred ~by:(Int.of_float are_same) p;
+        let _ = Vw.learn_string vw ec.train_string in
+        ()
+    end;
+
+    if (!ctr mod 500) = 0 then (
         printf "%.2f %.2f Take Rate: %f\n" !numerator_sum !denom_sum (!numerator_sum /. !denom_sum));
 
-    let _ = Vw.learn_string vw ec.train_string in
     incr ctr;
   );
   Vw.finish vw;
