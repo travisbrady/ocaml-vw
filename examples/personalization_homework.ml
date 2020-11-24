@@ -32,7 +32,7 @@ let parse_line line =
   let lab = List.hd_exn chunks in
   let labf = Float.of_string lab in
   let reward = Float.of_string (List.nth_exn chunks 1) in
-  let cost = 1.0 -. reward in
+  let cost = if Float.(reward = 1.0) then -1.0 else 1.0 in
   let vw_string = sprintf "%s:%.4f:0.1 | %s" lab cost features in
   let test_string = sprintf "| %s" features in
   {chunks=chunks; features=features; lab=lab; labf=labf;
@@ -40,7 +40,7 @@ let parse_line line =
     train_string=vw_string}
 
 let () =
-  let vw = Vw.initialize "--cb 10 --cover 12 --cb_type ips -l 0.001" in
+  let vw = Vw.initialize "--cb 10 --cover 3 --cb_type ips -l 0.001 --quiet" in
   let ic = In_channel.create "data/dataset.txt" in
   let ctr = ref 0 in
   let numerator_sum = ref 0.0 in
@@ -66,7 +66,7 @@ let () =
         ()
     end;
 
-    if (!ctr mod 500) = 0 then (
+    if (!ctr mod 1000) = 0 then (
         printf "%.2f %.2f Take Rate: %f\n" !numerator_sum !denom_sum (!numerator_sum /. !denom_sum));
 
     incr ctr;
